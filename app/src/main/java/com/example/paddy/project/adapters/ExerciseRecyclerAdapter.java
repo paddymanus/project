@@ -15,16 +15,18 @@ import java.util.ArrayList;
 public class ExerciseRecyclerAdapter extends RecyclerView.Adapter<ExerciseRecyclerAdapter.ViewHolder> {
 
     private ArrayList<Exercise> mExercises = new ArrayList<>();
+    private OnExerciseListener mOnExerciseListener;
 
-    public ExerciseRecyclerAdapter(ArrayList<Exercise> mExercises) {
+    public ExerciseRecyclerAdapter(ArrayList<Exercise> mExercises, OnExerciseListener onExerciseListener) {
         this.mExercises = mExercises;
+        this.mOnExerciseListener = onExerciseListener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerview_row, viewGroup, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, mOnExerciseListener);
     }
 
     @Override
@@ -40,14 +42,27 @@ public class ExerciseRecyclerAdapter extends RecyclerView.Adapter<ExerciseRecycl
         return mExercises.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView name, category;
+        OnExerciseListener onExerciseListener;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, OnExerciseListener onExerciseListener) {
             super(itemView);
             name = itemView.findViewById(R.id.tvAddExerciseName);
             category = itemView.findViewById(R.id.tvAddExerciseCategory);
+            this.onExerciseListener = onExerciseListener;
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            onExerciseListener.onExerciseClick(getAdapterPosition());
+        }
+    }
+
+    public interface OnExerciseListener{
+        void onExerciseClick(int position);
     }
 }

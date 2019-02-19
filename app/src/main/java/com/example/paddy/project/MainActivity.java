@@ -14,7 +14,7 @@ import com.example.paddy.project.models.Exercise;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ExerciseRecyclerAdapter.OnExerciseListener {
 
     // UI components
     private RecyclerView mRecyclerView;
@@ -29,9 +29,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mRecyclerView = findViewById(R.id.rvAddExercise);
 
+
         initRecyclerView();
         letsTrySomething();
-      //  insertFakeExercise();
+        //insertFakeExercise();
     }
 
     private void insertFakeExercise(){
@@ -64,9 +65,15 @@ public class MainActivity extends AppCompatActivity {
     private void initRecyclerView(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        mExerciseRecyclerAdapter = new ExerciseRecyclerAdapter(mExercise);
+        mExerciseRecyclerAdapter = new ExerciseRecyclerAdapter(mExercise, this);
         mRecyclerView.setAdapter(mExerciseRecyclerAdapter);
     }
 
 
+    @Override
+    public void onExerciseClick(int position) {
+        Intent intent = new Intent(this, ExerciseActivity.class);
+        intent.putExtra("selected_exercise", mExercise.get(position));
+        startActivity(intent);
+    }
 }
