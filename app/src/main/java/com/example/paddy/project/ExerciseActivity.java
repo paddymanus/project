@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.paddy.project.models.Exercise;
 
@@ -15,16 +16,32 @@ public class ExerciseActivity extends AppCompatActivity {
     private static final String TAG = "ExerciseActivity";
     private LinearLayout activityExerciseParent;
 
+    // UI components
+    private TextView mViewTitle;
+
+    // vars
+    private boolean mIsNewExercise;
+    private Exercise mInitialExercise;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise);
         activityExerciseParent = (LinearLayout) findViewById(R.id.activity_exercise_parent);
+        mViewTitle = findViewById(R.id.note_exercise_title);
 
-        if(getIntent().hasExtra("selected_exercise")){
-            Exercise exercise = getIntent().getParcelableExtra("selected_exercise");
-            Log.d(TAG, "onCreate: " + exercise.toString());
+        if(getIncomingIntent()){
+            setNewExerciseProperties();
         }
+        else {
+            setExerciseProperties();
+        }
+
+
+//        if(getIntent().hasExtra("selected_exercise")){
+//            Exercise exercise = getIntent().getParcelableExtra("selected_exercise");
+//            Log.d(TAG, "onCreate: " + exercise.toString());
+//        }
 
     }
 
@@ -38,4 +55,28 @@ public class ExerciseActivity extends AppCompatActivity {
     public void onDelete(View v) {
         activityExerciseParent.removeView((View) v.getParent());
     }
+
+    private boolean getIncomingIntent(){
+        if(getIntent().hasExtra("selected_exercise")){
+            mInitialExercise = getIntent().getParcelableExtra("selected_exercise");
+            Log.d(TAG, "getIncomingIntent: " + mInitialExercise.toString());
+
+            mIsNewExercise = false;
+            return false;
+        }
+        mIsNewExercise = true;
+        return true;
+    }
+
+    private void setExerciseProperties(){
+        mViewTitle.setText(mInitialExercise.getName());
+    }
+
+    private void setNewExerciseProperties(){
+        mViewTitle.setText("Exercise Title");
+    }
+
+
+
+
 }

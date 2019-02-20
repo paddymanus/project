@@ -10,14 +10,10 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/exercise_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
-
-        </android.support.v7.widget.Toolbar>
+        <include layout="@layout/layout_exercise_toolbar"/>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -30,7 +26,7 @@
             android:id="@+id/view_exercise_set_text"
             android:layout_width="42dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="100dp"
             android:layout_weight="0"
             android:gravity="start"
             android:text="@string/hint_set"
