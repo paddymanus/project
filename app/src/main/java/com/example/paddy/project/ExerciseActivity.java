@@ -6,18 +6,24 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.paddy.project.models.Exercise;
 
-public class ExerciseActivity extends AppCompatActivity {
+public class ExerciseActivity extends AppCompatActivity implements View.OnClickListener
+
+{
 
     private static final String TAG = "ExerciseActivity";
     private LinearLayout activityExerciseParent;
 
     // UI components
     private TextView mViewTitle;
+    private RelativeLayout mBackArrowContainer;
+    private ImageButton mBackArrow;
 
     // vars
     private boolean mIsNewExercise;
@@ -29,6 +35,7 @@ public class ExerciseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_exercise);
         activityExerciseParent = (LinearLayout) findViewById(R.id.activity_exercise_parent);
         mViewTitle = findViewById(R.id.note_exercise_title);
+        mBackArrow = findViewById(R.id.toolbar_back_arrow_exercise);
 
         if(getIncomingIntent()){
             setNewExerciseProperties();
@@ -36,12 +43,7 @@ public class ExerciseActivity extends AppCompatActivity {
         else {
             setExerciseProperties();
         }
-
-
-//        if(getIntent().hasExtra("selected_exercise")){
-//            Exercise exercise = getIntent().getParcelableExtra("selected_exercise");
-//            Log.d(TAG, "onCreate: " + exercise.toString());
-//        }
+        setListeners();
 
     }
 
@@ -54,6 +56,11 @@ public class ExerciseActivity extends AppCompatActivity {
 
     public void onDelete(View v) {
         activityExerciseParent.removeView((View) v.getParent());
+    }
+
+    private void setListeners(){
+        mBackArrow.setOnClickListener(this);
+
     }
 
     private boolean getIncomingIntent(){
@@ -75,6 +82,19 @@ public class ExerciseActivity extends AppCompatActivity {
     private void setNewExerciseProperties(){
         mViewTitle.setText("Exercise Title");
     }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.toolbar_back_arrow_exercise:{
+                finish();
+                break;
+            }
+        }
+
+    }
+
 
 
 

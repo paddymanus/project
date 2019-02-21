@@ -9,7 +9,7 @@
         android:id="@+id/view_exercise_set_text"
         android:layout_width="42dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="40dp"
         android:layout_weight="0"
         android:gravity="start"
         android:text="@string/hint_set"

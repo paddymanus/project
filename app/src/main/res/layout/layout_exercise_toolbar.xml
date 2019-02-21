@@ -18,7 +18,7 @@
             android:layout_height="40dp"
             android:src="@drawable/ic_arrow_back_black_24dp"
             android:background="?attr/selectableItemBackground"
-            android:id="@+id/toolbar_back_arrow_select_exercise"
+            android:id="@+id/toolbar_back_arrow_exercise"
             android:layout_centerInParent="true"
             />
 
@@ -28,8 +28,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="80"
-        android:id="@+id/note_text_title"
-        android:text="Select Exercise"
+        android:id="@+id/note_exercise_title"
+        android:text="Exercise Title"
         android:textColor="#000"
         android:layout_marginStart="15dp"
         android:textSize="23sp" />
@@ -41,7 +41,7 @@
         android:id="@+id/check_container">
 
         <ImageButton
-            android:id="@+id/toolbar_add"
+            android:id="@+id/toolbar_check"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentTop="true"
@@ -49,7 +49,7 @@
             android:layout_marginTop="0dp"
             android:layout_marginRight="80dp"
             android:background="?attr/selectableItemBackground"
-            android:src="@drawable/ic_add_black_24dp" />
+            android:src="@drawable/ic_check_black_24dp" />
 
     </RelativeLayout>
 

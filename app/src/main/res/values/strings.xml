@@ -3,4 +3,14 @@
     <string name="hint_set">Set</string>
     <string name="hint_weight">Weight</string>
     <string name="hint_reps">Reps</string>
+
+    <string-array name="muscles">
+        <item>Abs</item>
+        <item>Back</item>
+        <item>Biceps</item>
+        <item>Chest</item>
+        <item>Legs</item>
+        <item>Shoulders</item>
+        <item>Triceps</item>
+    </string-array>
 </resources>
