@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.paddy.project.models.Exercise;
 import com.example.paddy.project.persistence.ExerciseRepository;
@@ -21,8 +22,8 @@ public class NewExerciseActivity extends AppCompatActivity implements AdapterVie
     private ImageButton mBackArrow;
     private ImageButton mCheckButton;
     private TextView mViewTitle;
-    private EditText mEditExercise, mEditCategory;
-  //  private Spinner mEditCategory;
+    private EditText mEditExercise;
+    private Spinner mEditCategory;
 
     // vars
     private boolean mIsNewExercise;
@@ -35,8 +36,7 @@ public class NewExerciseActivity extends AppCompatActivity implements AdapterVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_exercise);
         mEditExercise = findViewById(R.id.exercise_edit_text);
-        mEditCategory = findViewById(R.id.exercise_category_edit_text);
-    //    mEditCategory = findViewById(R.id.spinnerCategory);
+        mEditCategory = findViewById(R.id.spinnerCategory);
         mBackArrow = findViewById(R.id.toolbar_back_arrow_exercise);
         mViewTitle = findViewById(R.id.exercise_edit_text);
         mCheckButton = findViewById(R.id.toolbar_check);
@@ -92,8 +92,9 @@ public class NewExerciseActivity extends AppCompatActivity implements AdapterVie
         temp = temp.replace(" ", "");
         if (temp.length() > 0) {
             mExerciseFinal.setName(mEditExercise.getText().toString());
-            mExerciseFinal.setCategory(mEditCategory.getText().toString());
-         //   mExerciseFinal.setCategory(mEditCategory.getParent().toString());
+            String muscleG = mEditCategory.getSelectedItem().toString();
+            mExerciseFinal.setCategory(muscleG);
+
         }
 
     }
@@ -103,7 +104,7 @@ public class NewExerciseActivity extends AppCompatActivity implements AdapterVie
         }
 
         private void setNewExerciseProperties () {
-            mViewTitle.setText("Exercise Title");
+            mViewTitle.setText("");
 
             mInitialExercise = new Exercise();
             mExerciseFinal = new Exercise();
