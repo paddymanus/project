@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/parent"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    card_view:cardCornerRadius="5dp">
+
+
+    <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        app:layout_constraintEnd_toStartOf="@+id/title_r"
+        app:layout_constraintStart_toStartOf="@+id/title_r">
+
+
+        <TextView
+            android:id="@+id/title_exercise_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/hint_exercise_name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="#DE000000" />
+
+        <TextView
+            android:id="@+id/title_s"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/hint_set"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="#DE000000"
+            app:layout_constraintTop_toBottomOf="@id/title_exercise_name" />
+
+        <TextView
+            android:id="@+id/title_sets"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/hint_set"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="#DE000000"
+            app:layout_constraintTop_toBottomOf="@id/title_s" />
+
+        <TextView
+            android:id="@+id/title_w"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/hint_weight"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="#DE000000"
+            app:layout_constraintStart_toEndOf="@id/title_sets"
+            app:layout_constraintTop_toBottomOf="@id/title_exercise_name" />
+
+        <TextView
+            android:id="@+id/title_weight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/hint_weight"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="#DE000000"
+            app:layout_constraintStart_toEndOf="@id/title_sets"
+            app:layout_constraintTop_toBottomOf="@id/title_w" />
+
+
+        <TextView
+            android:id="@+id/title_r"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/hint_reps"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="#DE000000"
+            app:layout_constraintStart_toEndOf="@id/title_weight"
+            app:layout_constraintTop_toBottomOf="@id/title_exercise_name" />
+
+        <TextView
+            android:id="@+id/title_reps"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/hint_reps"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="#DE000000"
+            app:layout_constraintStart_toEndOf="@id/title_weight"
+            app:layout_constraintTop_toBottomOf="@id/title_r" />
+
+
+
+        <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/rvSets"-->
+        <!--android:layout_width="308dp"-->
+        <!--android:layout_height="29dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="@+id/title_s"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/title_exercise_name" />-->
+
+
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.v7.widget.CardView>

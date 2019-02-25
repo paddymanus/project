@@ -2,6 +2,7 @@ package com.example.paddy.project;
 
 import android.arch.lifecycle.Observer;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements
 
     // UI components
     private RecyclerView mRecyclerView;
-    private ImageButton mAddButton;
+    private ImageButton mAddButton, mBackButton;
 
     // vars
     private ArrayList<Exercise> mExercise = new ArrayList<>();
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
         mRecyclerView = findViewById(R.id.rvAddExercise);
         mAddButton = findViewById(R.id.toolbar_add);
+        mBackButton = findViewById(R.id.toolbar_back_arrow_select_exercise);
 
         mExerciseRepository = new ExerciseRepository(this);
 
@@ -99,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private void setListeners(){
         mAddButton.setOnClickListener(this);
+        mBackButton.setOnClickListener(this);
 
     }
 
@@ -115,6 +118,11 @@ public class MainActivity extends AppCompatActivity implements
         switch (v.getId()){
             case R.id.toolbar_add:{
                 Intent intent = new Intent(this, NewExerciseActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.toolbar_back_arrow_select_exercise:{
+                Intent intent = new Intent(this, ExerciseLogListActivity.class);
                 startActivity(intent);
                 break;
             }
