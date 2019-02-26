@@ -19,6 +19,7 @@ public class NewExerciseActivity extends AppCompatActivity implements AdapterVie
         View.OnClickListener {
 
     // UI Components
+    private static final String TAG = "ExerciseActivity";
     private ImageButton mBackArrow;
     private ImageButton mCheckButton;
     private TextView mViewTitle;
@@ -94,6 +95,7 @@ public class NewExerciseActivity extends AppCompatActivity implements AdapterVie
             mExerciseFinal.setName(mEditExercise.getText().toString());
             String muscleG = mEditCategory.getSelectedItem().toString();
             mExerciseFinal.setCategory(muscleG);
+            Log.d(TAG, "getIncomingIntent: " + mExerciseFinal.toString());
 
         }
 

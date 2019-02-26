@@ -22,6 +22,7 @@ import com.example.paddy.project.adapters.SetRecyclerAdapter;
 import com.example.paddy.project.models.Exercise;
 import com.example.paddy.project.models.ExerciseSet;
 import com.example.paddy.project.models.Set;
+import com.example.paddy.project.persistence.ExerciseSetRepository;
 
 import java.util.ArrayList;
 
@@ -38,6 +39,8 @@ public class ExerciseActivity extends AppCompatActivity implements View.OnClickL
     private ImageButton mBackArrow, mCheck;
     private Button mAddButton;
     private RecyclerView mRecyclerView;
+    private EditText setWeightET;
+    private EditText setRepsET;
 
     // vars
     private boolean mIsNewExercise;
@@ -46,6 +49,8 @@ public class ExerciseActivity extends AppCompatActivity implements View.OnClickL
     private Exercise mInitialExercise;
     private ArrayList<Set> mSets = new ArrayList<>();
     private SetRecyclerAdapter mSetRecyclerAdapter;
+    private ExerciseSetRepository mExerciseSetRepository;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +61,12 @@ public class ExerciseActivity extends AppCompatActivity implements View.OnClickL
         mBackArrow = findViewById(R.id.toolbar_back_arrow_exercise);
         mCheck = findViewById(R.id.toolbar_check);
         mAddButton = findViewById(R.id.add_field_button);
+        setWeightET = findViewById(R.id.view_exercise_set_weight);
+        setRepsET = findViewById(R.id.view_exercise_set_reps);
         mRecyclerView = findViewById(R.id.view_exercise_recycler_list);
+        mExerciseSetRepository = new ExerciseSetRepository(this);
+
+
 
         if(getIncomingIntent()){
             setNewExerciseProperties();
@@ -111,6 +121,7 @@ public class ExerciseActivity extends AppCompatActivity implements View.OnClickL
             } catch (Exception e) {
                 mSets.get(i).set_setReps(0);
             }
+            Log.d(TAG, "getIncomingIntent: " + mSets.toString());
             Toast toast = Toast.makeText(getApplicationContext(), "message" + mSets, Toast.LENGTH_LONG);
             toast.show();
         }
@@ -129,9 +140,9 @@ public class ExerciseActivity extends AppCompatActivity implements View.OnClickL
             EditText setRepsET = (EditText) item.findViewById(R.id.view_exercise_set_reps);
             mExerciseSet.setSetWeight((Integer.valueOf(setWeightET.getText().toString())));
             mExerciseSet.setSetReps(Integer.valueOf(setRepsET.getText().toString()));
-
-            Toast toast = Toast.makeText(getApplicationContext(), "message" + mExerciseSet, Toast.LENGTH_LONG);
-            toast.show();
+            Log.d(TAG, "getIncomingIntent: " + mExerciseSet.toString());
+//            Toast toast = Toast.makeText(getApplicationContext(), "message" + mExerciseSet, Toast.LENGTH_LONG);
+//            toast.show();
 //            String weightString = setWeightET.getText().toString();
 //            Integer weight = Integer.valueOf(setWeightET);
 //            mExerciseSet.setSetNumber(String.valueOf(item));
@@ -140,6 +151,27 @@ public class ExerciseActivity extends AppCompatActivity implements View.OnClickL
         }
        // mExerciseSet.setExerciseSets(mSetRecyclerAdapter.getExerciseSets());
 
+    }
+
+    private void tryThis() {
+        mFinalSet = new ExerciseSet();
+        mFinalSet.setSetExerciseName(mViewTitle.getText().toString());
+        mFinalSet.setSetNumber(1);
+        EditText setWeightET = (EditText) findViewById(R.id.view_exercise_set_weight);
+        EditText setRepsET = (EditText) findViewById(R.id.view_exercise_set_reps);
+        mFinalSet.setSetWeight((Integer.valueOf(setWeightET.getText().toString())));
+        mFinalSet.setSetReps(Integer.valueOf(setRepsET.getText().toString()));
+
+    }
+
+//    private void saveChanges(){
+//        if(mIsNewExercise){
+//            saveNewExerciseSet();
+//        }
+//    }
+
+    private void saveNewExerciseSet(){
+        mExerciseSetRepository.insertSetTask(mExerciseSet);
     }
 
     public void onAddField(View v) {
@@ -196,6 +228,7 @@ public class ExerciseActivity extends AppCompatActivity implements View.OnClickL
             }
             case R.id.toolbar_check: {
                 updateExercise();
+                saveNewExerciseSet();
                 Intent intent = new Intent(this, ExerciseLogListActivity.class);
                 startActivity(intent);
                 break;
