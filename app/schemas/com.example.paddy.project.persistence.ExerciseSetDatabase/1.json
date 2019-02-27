@@ -15,25 +15,25 @@
             "notNull": true
           },
           {
-            "fieldPath": "setExerciseName",
+            "fieldPath": "name",
             "columnName": "exerciseName",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "setNumber",
+            "fieldPath": "number",
             "columnName": "setNo",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "setWeight",
+            "fieldPath": "weight",
             "columnName": "weight",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "setReps",
+            "fieldPath": "reps",
             "columnName": "reps",
             "affinity": "INTEGER",
             "notNull": true

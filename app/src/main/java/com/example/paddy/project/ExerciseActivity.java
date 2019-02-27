@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -25,6 +26,7 @@ import com.example.paddy.project.models.Set;
 import com.example.paddy.project.persistence.ExerciseSetRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ExerciseActivity extends AppCompatActivity implements View.OnClickListener
 
@@ -32,9 +34,11 @@ public class ExerciseActivity extends AppCompatActivity implements View.OnClickL
 
     private static final String TAG = "ExerciseActivity";
     private LinearLayout activityExerciseParent;
+    private LinearLayout activityLogParent;
 
     // UI components
-    private TextView mViewTitle;
+    private TextView mViewTitle, mSetNumber;
+    private ListView mListSet, mListWeight, mListReps;
     private RelativeLayout mBackArrowContainer;
     private ImageButton mBackArrow, mCheck;
     private Button mAddButton;
@@ -44,10 +48,11 @@ public class ExerciseActivity extends AppCompatActivity implements View.OnClickL
 
     // vars
     private boolean mIsNewExercise;
-    private ExerciseSet mExerciseSet;
+    private ExerciseSet exerciseSet;
     private ExerciseSet mFinalSet;
     private Exercise mInitialExercise;
     private ArrayList<Set> mSets = new ArrayList<>();
+    List<ExerciseSet> exercises = new ArrayList<ExerciseSet>();
     private SetRecyclerAdapter mSetRecyclerAdapter;
     private ExerciseSetRepository mExerciseSetRepository;
 
@@ -57,7 +62,9 @@ public class ExerciseActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise);
         activityExerciseParent = (LinearLayout) findViewById(R.id.activity_exercise_parent);
+        activityLogParent = (LinearLayout) findViewById(R.id.parent);
         mViewTitle = findViewById(R.id.note_exercise_title);
+        mSetNumber = findViewById(R.id.view_exercise_set_number);
         mBackArrow = findViewById(R.id.toolbar_back_arrow_exercise);
         mCheck = findViewById(R.id.toolbar_check);
         mAddButton = findViewById(R.id.add_field_button);
@@ -129,38 +136,51 @@ public class ExerciseActivity extends AppCompatActivity implements View.OnClickL
 
     public void updateExercise() {
         updateSets();
-        mExerciseSet = new ExerciseSet();
+
         LinearLayoutManager layoutManager = ((LinearLayoutManager)mRecyclerView.getLayoutManager());
-        mExerciseSet.setSetExerciseName(mViewTitle.getText().toString());
         int fvPosition = layoutManager.findFirstVisibleItemPosition();
         int lvPosition = layoutManager.findLastVisibleItemPosition();
+
+        ArrayList aListSet = new ArrayList<>();
+
+
+        List<String> listSet = new ArrayList<>();
+        List<String> listWeight = new ArrayList<>();
+        List<String> listReps = new ArrayList<>();
+
+
         for(int i = 0; i <= lvPosition - fvPosition; i++) {
+
+            exerciseSet = new ExerciseSet();
+            exerciseSet.setName(mViewTitle.getText().toString());
+//            exerciseSet.setNumber(mSetNumber.getText().toString());
             View item  = mRecyclerView.getChildAt(i);
             EditText setWeightET = (EditText) item.findViewById(R.id.view_exercise_set_weight);
             EditText setRepsET = (EditText) item.findViewById(R.id.view_exercise_set_reps);
-            mExerciseSet.setSetWeight((Integer.valueOf(setWeightET.getText().toString())));
-            mExerciseSet.setSetReps(Integer.valueOf(setRepsET.getText().toString()));
-            Log.d(TAG, "getIncomingIntent: " + mExerciseSet.toString());
-//            Toast toast = Toast.makeText(getApplicationContext(), "message" + mExerciseSet, Toast.LENGTH_LONG);
-//            toast.show();
-//            String weightString = setWeightET.getText().toString();
-//            Integer weight = Integer.valueOf(setWeightET);
-//            mExerciseSet.setSetNumber(String.valueOf(item));
-//            mExerciseSet.setSetWeight(weightString);
-//            mExerciseSet.setSetReps(setRepsET);
+//            TextView setNumberET = (TextView) item.findViewById(R.id.view_exercise_set_number);
+//            exerciseSet.setNumber((Integer.valueOf(setNumberET.toString())));
+            exerciseSet.setWeight((Integer.valueOf(setWeightET.getText().toString())));
+            exerciseSet.setReps(Integer.valueOf(setRepsET.getText().toString()));
+            exercises.add(exerciseSet);
+
+            listSet.add((String.valueOf(exerciseSet.getNumber())));
+            listWeight.add((String.valueOf(exerciseSet.getWeight())));
+            listReps.add((String.valueOf(exerciseSet.getReps())));
+
+            Log.d(TAG, "getIncomingIntent: " + exerciseSet.toString() + listSet + listWeight + listReps);
+
         }
-       // mExerciseSet.setExerciseSets(mSetRecyclerAdapter.getExerciseSets());
 
     }
 
     private void tryThis() {
         mFinalSet = new ExerciseSet();
-        mFinalSet.setSetExerciseName(mViewTitle.getText().toString());
-        mFinalSet.setSetNumber(1);
+        mFinalSet.setName(mViewTitle.getText().toString());
+        mFinalSet.setNumber(1);
         EditText setWeightET = (EditText) findViewById(R.id.view_exercise_set_weight);
         EditText setRepsET = (EditText) findViewById(R.id.view_exercise_set_reps);
-        mFinalSet.setSetWeight((Integer.valueOf(setWeightET.getText().toString())));
-        mFinalSet.setSetReps(Integer.valueOf(setRepsET.getText().toString()));
+        mFinalSet.setWeight((Integer.valueOf(setWeightET.getText().toString())));
+        mFinalSet.setReps(Integer.valueOf(setRepsET.getText().toString()));
 
     }
 
@@ -170,8 +190,15 @@ public class ExerciseActivity extends AppCompatActivity implements View.OnClickL
 //        }
 //    }
 
-    private void saveNewExerciseSet(){
-        mExerciseSetRepository.insertSetTask(mExerciseSet);
+    private void saveNewExerciseSet()
+    {
+//        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        final View rowView = inflater.inflate(R.layout.set_field, null);
+//        activityLogParent.addView(rowView, activityLogParent.getChildCount() -1);
+        for (int i = 0; i < exercises.size(); i++) {
+            // add to execises to sectioned list
+            mExerciseSetRepository.insertSetTask(exercises.get(i));
+        }
     }
 
     public void onAddField(View v) {

@@ -4,6 +4,7 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -14,25 +15,27 @@ public class ExerciseSet {
     private int id;
 
     @ColumnInfo(name = "exerciseName")
-    private String setExerciseName;
+    private String name;
 
     @ColumnInfo(name = "setNo")
-    private int setNumber;
+    private int number;
 
     @ColumnInfo(name = "weight")
-    private int setWeight;
+    private int weight;
 
     @ColumnInfo(name = "reps")
-    private int setReps;
-
- //   private ArrayList<ExerciseSet> mExerciseSets = new ArrayList<>();
+    private int reps;
 
 
-    public ExerciseSet(String setExerciseName, int setNumber, int setWeight, int setReps) {
-        this.setExerciseName = setExerciseName;
-        this.setNumber = setNumber;
-        this.setWeight = setWeight;
-        this.setReps = setReps;
+//  private ArrayList<ExerciseSet> mExerciseSets = new ArrayList<>();
+    //ExexerciseSet set("name", 0, 0, 0);
+
+
+    public ExerciseSet(String name, int number, int weight, int reps) {
+        this.name = name;
+        this.number = number;
+        this.weight = weight;
+        this.reps = reps;
     }
 
     @Ignore
@@ -43,13 +46,12 @@ public class ExerciseSet {
 //        mExerciseSets = exerciseSets;
 //    }
 
-    public String getSetExerciseName() {
-        return setExerciseName;
+
+    public String getName() {
+        return name;
     }
 
-    public void setSetExerciseName(String setExerciseName) {
-        this.setExerciseName = setExerciseName;
-    }
+    public void setName(String name) { this.name = name; }
 
     public int getId() {
         return id;
@@ -59,28 +61,26 @@ public class ExerciseSet {
         this.id = id;
     }
 
-    public int getSetNumber() {
-        return setNumber;
+    public int getNumber() {
+        return number;
     }
 
-    public void setSetNumber(int setNumber) {
-        this.setNumber = setNumber;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
-    public int getSetWeight() {
-        return setWeight;
+    public int getWeight() { return weight; }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 
-    public void setSetWeight(int setWeight) {
-        this.setWeight = setWeight;
+    public int getReps() {
+        return reps;
     }
 
-    public int getSetReps() {
-        return setReps;
-    }
-
-    public void setSetReps(int setReps) {
-        this.setReps = setReps;
+    public void setReps(int reps) {
+        this.reps = reps;
     }
 
 
@@ -88,10 +88,10 @@ public class ExerciseSet {
     public String toString() {
         return "ExerciseSet{" +
                 "id=" + id +
-                ", setExerciseName='" + setExerciseName + '\'' +
-                ", setNumber=" + setNumber +
-                ", setWeight=" + setWeight +
-                ", setReps=" + setReps +
+                ", setExerciseName='" + name + '\'' +
+                ", setNumber=" + number +
+                ", setWeight=" + weight +
+                ", setReps=" + reps +
                 '}';
     }
 }

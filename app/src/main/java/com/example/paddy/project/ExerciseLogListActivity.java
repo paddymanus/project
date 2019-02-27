@@ -53,10 +53,10 @@ public class ExerciseLogListActivity extends AppCompatActivity {
 
     private void letsTrySomething(){
         ExerciseSet exercise = new ExerciseSet();
-        exercise.setSetExerciseName("Barbell Row");
-        exercise.setSetNumber(1);
-        exercise.setSetWeight(20);
-        exercise.setSetReps(8);
+        exercise.setName("Barbell Row");
+        exercise.setNumber(1);
+        exercise.setWeight(20);
+        exercise.setReps(8);
         mSets.add(exercise);
 //        Exercise exercise1 = new Exercise();
 //        exercise1.setName("Bench Press");
